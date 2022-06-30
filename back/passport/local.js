@@ -35,10 +35,11 @@ passport.use(
     "jwt",
     new JWTStrategy(
         {
-            jwtFromRequest: ExtractJwt.fromHeader("authorization"),
             secretOrKey: "jwt-secret-key",
+            jwtFromRequest:ExtractJwt.fromHeader("authorization"),
         },
         async (jwtPayload, done) => {
+            console.log("왜 여기까지 안오지")
             try {
                 const user = await User.findOne({
                     where: {
@@ -49,9 +50,10 @@ passport.use(
                     done(null, user);
                 }
             } catch (error) {
+                console.log("여기도 안오잖아")
                 console.error(error);
                 return done(error);
             }
         }
     )
-)
+)  

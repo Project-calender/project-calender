@@ -22,6 +22,6 @@ module.exports = class PrivateCalendar extends Model {
   }
   static associate(db) {
     db.PrivateCalendar.belongsTo(db.User);
-    db.PrivateCalendar.hasMany(db.PrivateEvent, { as: "MyEvent" });
+    // db.PrivateCalendar.hasMany(db.PrivateEvent, { as: "MyEvent" });
   }
 };

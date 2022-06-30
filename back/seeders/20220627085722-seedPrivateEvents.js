@@ -19,7 +19,6 @@ module.exports = {
           createdAt: new Date(),
           updatedAt: new Date(),
           UserId: i + 1,
-          PrivateCalendarId: i + 1,
         };
 
         dummyPrivateEvent.push(privateEvent);

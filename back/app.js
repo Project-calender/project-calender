@@ -8,7 +8,7 @@ const dotenv = require("dotenv");
 //내부모듈
 const userRouter = require("./routes/user");
 const db = require("./models");
-const passportConfig = require("./passport");
+const passportConfig = require("./passport/local");
 
 //서버 가동
 dotenv.config();
@@ -28,13 +28,14 @@ app.use(
     credentials: true,
   })
 );
+passportConfig();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(passport.initialize());
 
 //라우터
-app.use("/user", userRouter);
+app.use("/api/user", userRouter);
 
 //포트 설정
 app.listen(8080, () => {

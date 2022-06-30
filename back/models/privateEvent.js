@@ -40,7 +40,9 @@ module.exports = class PrivateEvent extends Model {
     );
   }
   static associate(db) {
-    db.PrivateEvent.belongsTo(db.User);
-    db.PrivateEvent.belongsTo(db.PrivateCalendar);
+    db.PrivateEvent.belongsTo(db.User, {
+      onDelete: 'CASCADE'
+    });
+    // db.PrivateEvent.belongsTo(db.PrivateCalendar);
   }
 };

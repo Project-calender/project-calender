@@ -1,3 +1,4 @@
+const passport = require('passport')
 
 // exports.isLoggedIn = (req, res, next) => {
 //     if (req.isAuthenticated()) {
@@ -16,29 +17,32 @@
 // };
 
 exports.verifyToken = async (req, res, next) => {
-  if(!req.headers.authorization) {
+    console.log(req.headers.authorization)
+    if(!req.headers.authorization) {
       return res.status(419).send({ error: "noTokenError" });
-  }
-  passport.authenticate('jwt', { session: false}, (err, user, info) => {
-      try {
-          if (err) {
-              console.error(err);
-              return next(err)
-          }
-          if(info) {
-              if (info?.name === "TokenExpiredError") {
-                  return res.status(403).send({ error: info.name });
-              }
-              if(info?.name === "JsonWebTokenError") {
-                  return res.status(419).send({ error: info.name })
-              }
-          }
-
-          req.user = user;
-          next();
-      } catch (error) {
-          console.log(error)
-          next(error);
-      }
-  })
+    }
+    passport.authenticate('jwt', { session: false}, (err, user, info) => {
+        try {
+            if (err) {    
+                console.log("여기")
+                console.error(err);
+                return next(err)
+            }
+            console.log("44515243241456356356456456")
+            if(info) {
+                if (info?.name === "TokenExpiredError") {
+                    return res.status(403).send({ error: info.name });
+                }
+                if(info?.name === "JsonWebTokenError") {
+                    return res.status(419).send({ error: info.name })
+                }
+            }
+            req.user = user;
+            // return
+            next();
+        } catch (error) {
+            console.log(error)
+            next(error);
+        }
+    })
 }
